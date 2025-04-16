@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Police Database Dashboard</title>
+    <link rel="stylesheet" href="dashboardv6.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+    <div class="navbar">
+        <div class="menu-toggle" id="menuToggle">
+            <i class="fas fa-bars"></i>
+        </div>
+        <div class="logo">Police Database</div>
+        <div class="profile">
+            <button id="reloadDatabase" class="reload-btn">
+                <i class="fas fa-sync-alt"></i> Reload DB
+            </button>
+            <div class="admin-menu">
+                <button class="admin-button" id="adminMenuBtn">
+                    <span id="userRoleDisplay">User</span> <span class="admin-icon">▾</span>
+                </button>
+                <div id="adminDropdown" class="dropdown-content">
+                    <button class="logout-btn" id="logoutBtn">
+                        <i class="fas fa-sign-out-alt"></i> Logout
+                    </button>
+                </div>
+            </div>
+            
+        </div>
+    </div>
+
+    <div class="sidebar" id="sidebar">
+        <div class="sidebar-header">
+            <h3>Database Tables</h3>
+        </div>
+        <ul class="sidebar-menu" id="sidebarMenu">
+            <!-- Tables will be loaded dynamically -->
+        </ul>
+    </div>
+
+    <div class="main-content" id="mainContent">
+        <div id="dbStatus" class="status-message" style="display:none;">Database status</div>
+        
+        <div id="loadingIndicator" class="loading-indicator">
+            <div class="spinner"></div>
+            <p>Loading database...</p>
+        </div>
+        
+        <div id="errorMessage" class="error-message" style="display:none;">
+            Error loading database
+        </div>
+
+        <div class="profile-view" id="profileView">
+            <h2>User Profile</h2>
+            <div class="profile-info">
+                <p><strong>Name:</strong> <span id="profileName">Loading...</span></p>
+                <p><strong>Role:</strong> <span id="profileRole">Loading...</span></p>
+                <p><strong>Department:</strong> <span id="profileDepartment">Loading...</span></p>
+                <p><strong>Badge Number:</strong> <span id="profileBadge">Loading...</span></p>
+            </div>
+        </div>
+
+        <div class="table-view" id="tableView" style="display: none;">
+            <div class="table-controls">
+                <button class="insert-button" id="showInsertForm">+ Add New Record</button>
+                <input type="text" id="globalSearch" placeholder="Search across all columns...">
+            </div>
+            <div id="recordFormContainer" style="display: none; margin-bottom: 20px;"></div>
+            <div class="table-container" id="tableContainer">
+                <!-- Tables will be loaded here dynamically -->
+            </div>
+        </div>
+    </div>
+
+    <div id="formModal" class="modal" style="display:none;">
+        <div class="modal-content">
+            <span id="closeModal" class="close">&times;</span>
+            <h2 id="formTitle">Form</h2>
+            <form id="dynamicForm">
+                <!-- Fields will be generated here -->
+                <button type="submit" class="insert-button">Save</button>
+            </form>
+        </div>
+    </div>
+
+    <script defer src="dashboardv6.1_patched_copy.js"></script>
+</body>
+</html>

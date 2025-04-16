@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin - User Management</title>
+  <link rel="stylesheet" href="admin.css">
+  <script src="admin.js" defer></script>
+</head>
+<body>
+    <div class="navbar">
+        <div class="logo">User Management</div>
+        <div class="admin-menu">
+          <button class="admin-button" onclick="toggleDropdown(this)">
+            Admin <span class="admin-icon">▾</span>
+          </button>
+          <div id="adminDropdown" class="dropdown-content">
+            <button class="logout-btn" onclick="logout()">
+              Logout
+            </button>
+          </div>
+        </div>
+      </div>
+
+  <div class="center-wrapper">
+    <div class="container">
+      <h2>User Management</h2>
+<div class="search-section">
+        <input type="text" placeholder="Search by Username" id="search" onkeyup="searchUser()">
+      </div>
+      <button class="add-user" onclick="showForm()">Add User</button>
+      
+      <div class="form-popup" id="userForm" style="display: none;">
+        <input type="text" placeholder="Username" id="username">
+        <input type="password" placeholder="Password" id="password">
+        <input type="text" placeholder="Name" id="name">
+        <input type="text" placeholder="Role" id="role">
+        <input type="text" placeholder="Department ID" id="departmentID">
+        <input type="text" placeholder="Badge Number" id="badgeNumber">
+        <input type="email" placeholder="Email" id="email">
+        <select id="status">
+          <option value="active">Active</option>
+          <option value="inactive">Inactive</option>
+        </select>
+        <button onclick="saveUser()">Save</button>
+        <button onclick="hideForm()">Cancel</button>
+      </div>
+      <table>
+        <thead>
+          <tr>
+            <th>Username</th>
+            <th>Name</th>
+            <th>Role</th>
+            <th>Department ID</th>
+            <th>Badge Number</th>
+            <th>Email</th>
+            <th>Status</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+        <tbody id="userTable">
+          <!-- Users will be added here dynamically -->
+        </tbody>
+      </table>
+    </div>
+  </div>
+</body>
+</html>

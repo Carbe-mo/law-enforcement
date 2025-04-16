@@ -53,7 +53,7 @@ document.addEventListener("DOMContentLoaded", async function () {
     }
 
     async function getUserData() {
-    const user = await fetch('http://localhost:4000/api/current-user').then(res => res.json());
+    const user = await fetch('https://law-enforcement.onrender.com/api/current-user').then(res => res.json());
 
     if (!user || !user.username) {
         return { name: "Guest", role: "guest", department: "None", badgeNumber: "N/A" };
@@ -61,10 +61,10 @@ document.addEventListener("DOMContentLoaded", async function () {
 
     let department = "Unknown Department";
     if (user.role === 'police') {
-        const personnel = await fetch('http://localhost:4000/api/table/policePersonnel').then(res => res.json());
+        const personnel = await fetch('https://law-enforcement.onrender.com/api/table/policePersonnel').then(res => res.json());
         const person = personnel.find(p => p.userID === user.userID);
         if (person) {
-            const departments = await fetch('http://localhost:4000/api/table/policeDepartment').then(res => res.json());
+            const departments = await fetch('https://law-enforcement.onrender.com/api/table/policeDepartment').then(res => res.json());
             const dept = departments.find(d => d.id === person.policeStationID);
             if (dept) department = `${dept.location} Police Station`;
         }
@@ -121,7 +121,7 @@ document.addEventListener("DOMContentLoaded", async function () {
         });
         sidebarMenu.appendChild(profileItem);
 
-        const tableNames = await fetch('http://localhost:4000/api/tables').then(res => res.json());
+        const tableNames = await fetch('https://law-enforcement.onrender.com/api/tables').then(res => res.json());
         const excludedTables = ['users', 'casehandledby', 'useractivitylog', 'cybercrimefir'];
 
         tableNames.forEach(table => {
@@ -148,7 +148,7 @@ document.addEventListener("DOMContentLoaded", async function () {
         tableView.style.display = 'block';
         recordFormContainer.style.display = 'none';
 
-        const data = await fetch(`http://localhost:4000/api/table/${tableName}`).then(res => res.json());
+        const data = await fetch(`https://law-enforcement.onrender.com/api/table/${tableName}`).then(res => res.json());
         if (!data.length) {
             tableContainer.innerHTML = `<div class="empty-table">No data available for table: ${formatTableName(tableName)}</div>`;
             return;
@@ -183,9 +183,9 @@ document.addEventListener("DOMContentLoaded", async function () {
                 const tableName = activeItem.getAttribute('data-table-name');
 
                 try {
-                    const { primaryKey } = await fetch(`http://localhost:4000/api/table/${tableName}/primary-key`).then(res => res.json());
+                    const { primaryKey } = await fetch(`https://law-enforcement.onrender.com/api/table/${tableName}/primary-key`).then(res => res.json());
                     const primaryValue = cells[0].textContent;
-                    const tableData = await fetch(`http://localhost:4000/api/table/${tableName}`).then(res => res.json());
+                    const tableData = await fetch(`https://law-enforcement.onrender.com/api/table/${tableName}`).then(res => res.json());
                     const originalColumns = Object.keys(tableData[0] || {});
 
                     cells.forEach((cell, index) => {
@@ -212,7 +212,7 @@ document.addEventListener("DOMContentLoaded", async function () {
                         });
 
                         try {
-                            const response = await fetch(`http://localhost:4000/api/table/${tableName}/${primaryValue}`, {
+                            const response = await fetch(`https://law-enforcement.onrender.com/api/table/${tableName}/${primaryValue}`, {
                                 method: 'PUT',
                                 headers: {
                                     'Content-Type': 'application/json',
@@ -247,10 +247,10 @@ document.addEventListener("DOMContentLoaded", async function () {
                 const tableName = sidebarMenu.querySelector('li.active').getAttribute('data-table-name');
 
                 try {
-                    const { primaryKey } = await fetch(`http://localhost:4000/api/table/${tableName}/primary-key`).then(res => res.json());
+                    const { primaryKey } = await fetch(`https://law-enforcement.onrender.com/api/table/${tableName}/primary-key`).then(res => res.json());
                     const primaryValue = row.querySelector('td').textContent;
 
-                    const response = await fetch(`http://localhost:4000/api/delete`, {
+                    const response = await fetch(`https://law-enforcement.onrender.com/api/delete`, {
                         method: 'POST',
                         headers: { 'Content-Type': 'application/json' },
                         body: JSON.stringify({ table: tableName, column: primaryKey, value: primaryValue })
@@ -281,8 +281,8 @@ document.addEventListener("DOMContentLoaded", async function () {
             if (!active || active.textContent === 'My Profile') return alert("Select a table first");
 
             const tableName = active.getAttribute('data-table-name');
-            const data = await fetch(`http://localhost:4000/api/table/${tableName}`).then(res => res.json());
-            const { primaryKey } = await fetch(`http://localhost:4000/api/table/${tableName}/primary-key`).then(res => res.json());
+            const data = await fetch(`https://law-enforcement.onrender.com/api/table/${tableName}`).then(res => res.json());
+            const { primaryKey } = await fetch(`https://law-enforcement.onrender.com/api/table/${tableName}/primary-key`).then(res => res.json());
 
             const container = recordFormContainer;
             container.innerHTML = '';
@@ -307,7 +307,7 @@ document.addEventListener("DOMContentLoaded", async function () {
             form.addEventListener('submit', async e => {
                 e.preventDefault();
                 const formData = Object.fromEntries(new FormData(form));
-                await fetch(`http://localhost:4000/api/table/${tableName}`, {
+                await fetch(`https://law-enforcement.onrender.com/api/table/${tableName}`, {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify(formData)

@@ -82,7 +82,7 @@ async function saveUser () {
     const existingUser  = document.querySelector(`#userTable tr[data-username="${username}"]`);
     if (existingUser ) {
         // Update existing user
-        const response = await fetch(`http://localhost:4000/users/${username}`, {
+        const response = await fetch(`https://law-enforcement.onrender.com/users/${username}`, {
             method: 'PUT',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(userData),
@@ -92,7 +92,7 @@ async function saveUser () {
         }
     } else {
         // Create new user
-        const response = await fetch('http://localhost:4000/users', {
+        const response = await fetch('https://law-enforcement.onrender.com/users', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(userData),
@@ -107,7 +107,7 @@ async function saveUser () {
 
 // Load users from the server
 async function loadUsers() {
-    const response = await fetch('http://localhost:4000/users');
+    const response = await fetch('https://law-enforcement.onrender.com/users');
     const users = await response.json();
     const table = document.getElementById('userTable');
     table.innerHTML = ''; // Clear existing rows
@@ -146,7 +146,7 @@ function searchUser () {
 
 // Delete a user
 async function deleteUser (username) {
-    const response = await fetch(`http://localhost:4000/users/${username}`, {
+    const response = await fetch(`https://law-enforcement.onrender.com/users/${username}`, {
         method: 'DELETE',
     });
     if (response.ok) {

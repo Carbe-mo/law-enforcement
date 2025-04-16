@@ -12,7 +12,7 @@ app.use(cors());
 app.use(bodyParser.json());
 
 const dbConfig = {
-    host: 'localhost',
+    host: 'law-enforcement-db.cp000yayw4rn.ap-south-1.rds.amazonaws.com',
     user: 'new_username', // change to your MySQL username
     password: 'new_password', // change to your MySQL password
     database: 'project'
@@ -331,7 +331,7 @@ app.put('/api/table/:name/:id', (req, res) => {
     });
 });
 
-app.delete('/api/delete', (req, res) => {
+app.post('/api/delete', (req, res) => {
     const { table, column, value } = req.body;
     if (!table || !column || value === undefined) {
         return res.status(400).json({ error: 'Missing table, column, or value' });
@@ -353,7 +353,7 @@ app.delete('/api/delete', (req, res) => {
     });
 
     if (portFree) {
-        app.listen(PORT, () => console.log(`Server running at http://localhost:${PORT}`));
+        app.listen(PORT, () => console.log(`Server running at http://law-enforcement-db.cp000yayw4rn.ap-south-1.rds.amazonaws.com:${PORT}`));
     } else {
         console.error(`Port ${PORT} already in use.`);
     }

@@ -251,7 +251,7 @@ document.addEventListener("DOMContentLoaded", async function () {
                     const primaryValue = row.querySelector('td').textContent;
 
                     const response = await fetch(`http://localhost:4000/api/delete`, {
-                        method: 'DELETE',
+                        method: 'POST',
                         headers: { 'Content-Type': 'application/json' },
                         body: JSON.stringify({ table: tableName, column: primaryKey, value: primaryValue })
                     });
